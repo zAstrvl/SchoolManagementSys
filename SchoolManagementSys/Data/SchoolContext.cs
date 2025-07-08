@@ -41,7 +41,32 @@ namespace SchoolManagementSys.Data
                     DateOfBirth = new DateTime(1993, 4, 27)
                 }
                 );
+            modelBuilder.Entity<Teacher>().HasData(
+                new Teacher
+                {
+                    Id = 1,
+                    Name = "Ali",
+                    Surname = "Demir",
+                    DateOfBirth = new DateTime(1985, 3, 15),
+                    Subject = "Mathematics",
+                    Email = "fsadfasfas@aasdfasddas.cascas",
+                    PhoneNumber = "123456789013234",
+                    Graduated = "Ankara University"
+                },
+                new Teacher
+                {
+                    Id = 2,
+                    Name = "Veli",
+                    Surname = "Demirci",
+                    DateOfBirth = new DateTime(1984, 1, 24),
+                    Subject = "Physics",
+                    Email = "fadfas@aasrewdff.aascas",
+                    PhoneNumber = "123451308224",
+                    Graduated = "Istanbul University"
+                }
+                );
         }
         public DbSet<Student> Students { get; set; }
-    }
+        public DbSet<Teacher> Teachers { get; set; }
+        }
 }
