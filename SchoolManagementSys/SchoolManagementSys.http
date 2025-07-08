@@ -1,0 +1,11 @@
+@rootURL = https://localhost:7294
+
+GET {{rootURL}}/api/students
+Accept: application/json
+
+###
+
+GET {{rootURL}}/api/students/4
+Accept: application/json
+
+###
