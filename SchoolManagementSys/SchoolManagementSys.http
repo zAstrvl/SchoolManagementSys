@@ -9,3 +9,27 @@ GET {{rootURL}}/api/students/4
 Accept: application/json
 
 ###
+
+POST {{rootURL}}/api/students
+Content-Type: application/json
+{
+  "id": 5,
+  "name": "Arzu",
+  "surname": "Özel",
+  "dateOfBirth": "1979-05-16T00:00:00"
+}
+
+###
+
+PUT {{rootURL}}/api/students/1
+Content-Type: application/json
+{
+  "id": 1,
+  "name": "Arzu",
+  "surname": "Özel",
+  "dateOfBirth": "1979-05-16T00:00:00"
+}
+
+###
+
+DELETE {{rootURL}}/api/students/1
