@@ -33,3 +33,48 @@ Content-Type: application/json
 ###
 
 DELETE {{rootURL}}/api/students/1
+
+###
+
+GET {{rootURL}}/api/teachers
+Accept: application/json
+
+###
+
+GET {{rootURL}}/api/teachers/2
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/teachers
+Content-Type: application/json
+{
+  "id": 3,
+  "name": "Arzu",
+  "surname": "Özel",
+  "dateOfBirth": "1979-05-16T00:00:00",
+  "subject": "Arts",
+  "email": "aafzvffvv@ffsa.cc",
+  "phoneNumber": "4134514491344",
+  "graduated": "boun"
+}
+
+###
+
+PUT {{rootURL}}/api/teachers/1
+{
+  "id": 3,
+  "name": "Arzu",
+  "surname": "Özel",
+  "dateOfBirth": "1979-05-16T00:00:00",
+  "subject": "Arts",
+  "email": "aafzvffvv@ffsa.cc",
+  "phoneNumber": "4134514491344",
+  "graduated": "boun"
+}
+
+###
+
+DELETE {{rootURL}}/api/teachers/1
+
+###
