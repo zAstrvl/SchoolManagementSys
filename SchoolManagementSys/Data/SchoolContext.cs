@@ -65,8 +65,29 @@ namespace SchoolManagementSys.Data
                     Graduated = "Istanbul University"
                 }
                 );
+            modelBuilder.Entity<Parent>().HasData(
+                new Parent
+                {
+                    Id = 1,
+                    Name = "Ahmet",
+                    Surname = "Yılmaz",
+                    PhoneNumber = "4512512342134",
+                    Email = "fffroedasf@fafd.cc",
+                    Address = "123 Main St, Ankara"
+                },
+                new Parent
+                {
+                    Id = 2,
+                    Name = "Fatih",
+                    Surname = "Arslan",
+                    PhoneNumber = "451234",
+                    Email = "fdasdfsa@12fadfa.daer",
+                    Address = "Nilüfer, Bursa"
+                }
+                );
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        }
+        public DbSet<Parent> Parents { get; set; }
+    }
 }
