@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SchoolManagementSys.Data;
 using SchoolManagementSys.Models;
 
 namespace SchoolManagementSys.Controllers
@@ -7,39 +9,38 @@ namespace SchoolManagementSys.Controllers
     [ApiController]
     public class ParentsController : ControllerBase
     {
-        private static readonly List<Parent> parents = [];
-
-        [HttpGet]
-        public ActionResult<List<Parent>> GetParents()
+        private readonly SchoolContext _context;
+        public ParentsController(SchoolContext context)
         {
+            _context = context;
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<Parent>>> GetParents()
+        {
+            var parents = await _context.Parents.ToListAsync();
             return Ok(parents);
         }
-
         [HttpGet("{id}")]
-        public ActionResult<Parent> GetParentById(int id)
+        public async Task<ActionResult<Parent>> GetParentById(int id)
         {
-            var parent = parents.FirstOrDefault(p => p.Id == id);
+            var parent = await _context.Parents.FindAsync(id);
             if (parent == null)
                 return NotFound();
-
             return Ok(parent);
         }
-
         [HttpPost]
-        public ActionResult<Parent> AddParent(Parent newParent)
+        public async Task<ActionResult<Parent>> AddParent(Parent newParent)
         {
             if (newParent == null || string.IsNullOrWhiteSpace(newParent.Name) || string.IsNullOrWhiteSpace(newParent.Surname))
-                return BadRequest("Invalid parent data.");
-
-            newParent.Id = parents.Any() ? parents.Max(p => p.Id) + 1 : 1;
-            parents.Add(newParent);
-
+                return BadRequest("Invalid teacher data.");
+            _context.Parents.Add(newParent);
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetParentById), new { id = newParent.Id }, newParent);
         }
         [HttpPut("{id}")]
-        public IActionResult UpdateParent(int id, Parent updatedParent)
+        public async Task<IActionResult> UpdateParent(int id, Parent updatedParent)
         {
-            var parent = parents.FirstOrDefault(p => p.Id == id);
+            var parent = await _context.Parents.FirstOrDefaultAsync(s => s.Id == id);
             if (parent == null)
                 return NotFound();
 
@@ -50,16 +51,18 @@ namespace SchoolManagementSys.Controllers
             parent.PhoneNumber = updatedParent.PhoneNumber;
             parent.Address = updatedParent.Address;
 
+            await _context.SaveChangesAsync();
             return NoContent();
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteParent(int id)
+        public async Task<IActionResult> DeleteParent(int id)
         {
-            var parent = parents.FirstOrDefault(p => p.Id == id);
+            var parent = await _context.Parents.FirstOrDefaultAsync(s => s.Id == id);
             if (parent == null)
                 return NotFound();
 
-            parents.Remove(parent);
+            _context.Parents.Remove(parent);
+            await _context.SaveChangesAsync();
             return NoContent();
         }
     }

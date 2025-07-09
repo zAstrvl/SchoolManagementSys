@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SchoolManagementSys.Data;
 using SchoolManagementSys.Models;
 
 namespace SchoolManagementSys.Controllers
@@ -7,52 +9,57 @@ namespace SchoolManagementSys.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private static readonly List<Student> students = [];
-
-        [HttpGet]
-        public ActionResult<List<Student>> GetStudents()
+        private readonly SchoolContext _context;
+        public StudentsController(SchoolContext context)
         {
+            _context = context;
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<Student>>> GetStudents()
+        {
+            var students = await _context.Students.ToListAsync();
             return Ok(students);
         }
         [HttpGet("{id}")]
-        public ActionResult<Student> GetStudentById(int id)
+        public async Task<ActionResult<Student>> GetStudentById(int id)
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
-            if(student == null)
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
                 return NotFound();
             return Ok(student);
         }
         [HttpPost]
-        public ActionResult<Student> AddStudent(Student newStudent)
+        public async Task<ActionResult<Student>> AddStudent(Student newStudent)
         {
             if (newStudent == null || string.IsNullOrWhiteSpace(newStudent.Name) || string.IsNullOrWhiteSpace(newStudent.Surname))
-                return BadRequest("Invalid student data.");
-            newStudent.Id = students.Max(s => s.Id) + 1;
-            students.Add(newStudent);
+                return BadRequest("Invalid teacher data.");
+            _context.Students.Add(newStudent);
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetStudentById), new { id = newStudent.Id }, newStudent);
         }
         [HttpPut("{id}")]
-        public IActionResult UpdateStudent(int id, Student updatedStudent)
+        public async Task<IActionResult> UpdateStudent(int id, Student updatedStudent)
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
             if (student == null)
                 return NotFound();
 
-            student.Id = updatedStudent.Id;
             student.Name = updatedStudent.Name;
             student.Surname = updatedStudent.Surname;
             student.DateOfBirth = updatedStudent.DateOfBirth;
 
+            await _context.SaveChangesAsync();
             return NoContent();
         }
         [HttpDelete("{id}")]
-        public IActionResult DeleteStudent(int id)
+        public async Task<IActionResult> DeleteStudent(int id)
         {
-            var student = students.FirstOrDefault(s => s.Id == id);
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
             if (student == null)
                 return NotFound();
 
-            students.Remove(student);
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
             return NoContent();
         }
     }
