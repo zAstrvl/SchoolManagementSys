@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SchoolManagementSys.Data;
-using SchoolManagementSys.Migrations;
 using SchoolManagementSys.Models;
 
 namespace SchoolManagementSys.Controllers
@@ -19,15 +19,30 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDto loginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            var user = _context.Parents.FirstOrDefault(p => p.Email == loginDto.Email && p.PasswordHash.ToString() == loginDto.Password);
-            if (user == null)
-                return Unauthorized();
-            if (user.PasswordHash.ToString() != HashClass.HashPassword(loginDto.Password))
-                return Unauthorized();
-            var token = JwtTokenHelper.GenerateToken(user.Email, _configuration["Jwt:Key"]);
-            return Ok(new { token });
+            var parent = await _context.Parents.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+            if (parent != null && HashClass.VerifyPassword(parent.PasswordHash, loginDto.Password))
+            {
+                var token = JwtTokenHelper.GenerateToken(parent.Email!, _configuration["Jwt:Key"]);
+                return Ok(new { token, userType = "Parent" });
+            }
+
+            var teacher = await _context.Teachers.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+            if (teacher != null && HashClass.VerifyPassword(teacher.PasswordHash, loginDto.Password))
+            {
+                var token = JwtTokenHelper.GenerateToken(teacher.Email!, _configuration["Jwt:Key"]);
+                return Ok(new { token, userType = "Teacher" });
+            }
+
+            var student = await _context.Students.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+            if (student != null && HashClass.VerifyPassword(student.PasswordHash, loginDto.Password))
+            {
+                var token = JwtTokenHelper.GenerateToken(student.Email!, _configuration["Jwt:Key"]);
+                return Ok(new { token, userType = "Student" });
+            }
+
+            return Unauthorized();
         }
     }
 }

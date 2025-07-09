@@ -13,11 +13,11 @@ Accept: application/json
 POST {{rootURL}}/api/students
 Content-Type: application/json
 {
-  "name": "Eren",
+  "name": "Fatih",
   "surname": "Arslan",
-  "identityNumber": "12345678901",
-  "passwordHash": "1234567890abcde",
-  "dateOfBirth": "2004-05-31T00:00:00"
+  "Email": "35449829041",
+  "passwordHash": "7898980912894fdsaa",
+  "dateOfBirth": "1975-02-20T00:00:00"
 }
 
 ###
@@ -27,7 +27,7 @@ Content-Type: application/json
 {
   "name": "Fatih",
   "surname": "Arslan",
-  "identityNumber": "35449829041",
+  "Email": "35449829041",
   "passwordHash": "7898980912894fdsaa",
   "dateOfBirth": "1975-02-20T00:00:00"
 }
@@ -122,5 +122,14 @@ Content-Type: application/json
 ###
 
 DELETE {{rootURL}}/api/parents/3
+
+###
+
+POST {{rootURL}}/api/auth/login
+Content-Type: application/json
+{
+  "email": "fdafasd@sfdfaa.ccads",
+  "password": "asfsfas43gfja8939842"
+}
 
 ###

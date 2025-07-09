@@ -48,7 +48,7 @@ namespace SchoolManagementSys.Controllers
 
             student.Name = updatedStudent.Name;
             student.Surname = updatedStudent.Surname;
-            student.IdentityNumber = updatedStudent.IdentityNumber;
+            student.Email = updatedStudent.Email;
             student.PasswordHash = HashClass.HashPassword(updatedStudent.PasswordHash);
             student.DateOfBirth = updatedStudent.DateOfBirth;
 
