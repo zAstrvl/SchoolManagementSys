@@ -5,7 +5,7 @@ Accept: application/json
 
 ###
 
-GET {{rootURL}}/api/students/4
+GET {{rootURL}}/api/students/5
 Accept: application/json
 
 ###
@@ -13,24 +13,28 @@ Accept: application/json
 POST {{rootURL}}/api/students
 Content-Type: application/json
 {
-  "name": "Irmak",
+  "name": "Eren",
   "surname": "Arslan",
-  "dateOfBirth": "2007-12-11T00:00:00"
+  "identityNumber": "12345678901",
+  "passwordHash": "1234567890abcde",
+  "dateOfBirth": "2004-05-31T00:00:00"
 }
 
 ###
 
-PUT {{rootURL}}/api/students/1
+PUT {{rootURL}}/api/students/7
 Content-Type: application/json
 {
   "name": "Fatih",
   "surname": "Arslan",
+  "identityNumber": "35449829041",
+  "passwordHash": "7898980912894fdsaa",
   "dateOfBirth": "1975-02-20T00:00:00"
 }
 
 ###
 
-DELETE {{rootURL}}/api/students/1
+DELETE {{rootURL}}/api/students/8
 
 ###
 
@@ -47,18 +51,19 @@ Accept: application/json
 POST {{rootURL}}/api/teachers
 Content-Type: application/json
 {
-  "name": "Arzu",
-  "surname": "Özel",
-  "dateOfBirth": "1979-05-16T00:00:00",
-  "subject": "Arts",
-  "email": "aafzvffvv@ffsa.cc",
-  "phoneNumber": "4134514491344",
-  "graduated": "boun"
+  "name": "Eren",
+  "surname": "Arslan",
+  "dateOfBirth": "2004-05-31T00:00:00",
+  "subject": "Computers",
+  "email": "fasfgadg@gfadgfsd.dadaad",
+  "passwordHash": "asfsfas43gfja8939842",
+  "phoneNumber": "74139416841",
+  "graduated": "baun"
 }
 
 ###
 
-PUT {{rootURL}}/api/teachers/2
+PUT {{rootURL}}/api/teachers/3
 Content-Type: application/json
 {
   "name": "Tolga",
@@ -66,12 +71,56 @@ Content-Type: application/json
   "dateOfBirth": "1990-05-30T00:00:00",
   "subject": "Economics",
   "email": "tffasgrfhgv@ffeggd.bmdm",
+  "passwordHash": "mjkd93ukoo203",
   "phoneNumber": "3135694329",
   "graduated": "itu"
 }
 
 ###
 
-DELETE {{rootURL}}/api/teachers/1
+DELETE {{rootURL}}/api/teachers/4
+
+###
+
+GET {{rootURL}}/api/parents
+Accept: application/json
+
+###
+
+GET {{rootURL}}/api/parents/3
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/parents
+Content-Type: application/json
+{
+  "name": "Eren",
+  "surname": "Arslan",
+  "dateOfBirth": "2004-05-31T00:00:00",
+  "email": "fdafasd@sfdfaa.ccads",
+  "passwordHash": "asfsfas43gfja8939842",
+  "phoneNumber": "74139416841",
+  "address": "Eminonu, Istanbul"
+}
+
+###
+
+PUT {{rootURL}}/api/parents/3
+Content-Type: application/json
+
+{
+  "name": "Fatih",
+  "surname": "Arslan",
+  "dateOfBirth": "1975-02-03T00:00:00",
+  "email": "ddffccfas31@fasdfas.dews",
+  "passwordHash": "dasffdasfas",
+  "phoneNumber": "321312",
+  "address": "Karakoy, Istanbul"
+}
+
+###
+
+DELETE {{rootURL}}/api/parents/3
 
 ###

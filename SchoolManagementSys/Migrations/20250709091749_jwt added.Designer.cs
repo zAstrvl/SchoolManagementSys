@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolManagementSys.Data;
 
@@ -11,9 +12,11 @@ using SchoolManagementSys.Data;
 namespace SchoolManagementSys.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20250709091749_jwt added")]
+    partial class jwtadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,8 +45,7 @@ namespace SchoolManagementSys.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -55,6 +57,30 @@ namespace SchoolManagementSys.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parents");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "123 Main St, Ankara",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "fffroedasf@fafd.cc",
+                            Name = "Ahmet",
+                            Password = "asd123",
+                            PhoneNumber = "4512512342134",
+                            Surname = "Yılmaz"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Nilüfer, Bursa",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "fdasdfsa@12fadfa.daer",
+                            Name = "Fatih",
+                            Password = "3441431",
+                            PhoneNumber = "451234",
+                            Surname = "Arslan"
+                        });
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Student", b =>
@@ -74,8 +100,7 @@ namespace SchoolManagementSys.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
@@ -84,6 +109,36 @@ namespace SchoolManagementSys.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTime(2004, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Eren",
+                            Surname = "Arslan"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfBirth = new DateTime(2000, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Miraç Can",
+                            Surname = "Yüksel"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateOfBirth = new DateTime(1981, 6, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Kürşat",
+                            Surname = "Özel"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateOfBirth = new DateTime(1993, 4, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Ömer Can",
+                            Surname = "Yiğit"
+                        });
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Teacher", b =>
@@ -106,8 +161,7 @@ namespace SchoolManagementSys.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -122,6 +176,30 @@ namespace SchoolManagementSys.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teachers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTime(1985, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "fsadfasfas@aasdfasddas.cascas",
+                            Graduated = "Ankara University",
+                            Name = "Ali",
+                            PhoneNumber = "123456789013234",
+                            Subject = "Mathematics",
+                            Surname = "Demir"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfBirth = new DateTime(1984, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "fadfas@aasrewdff.aascas",
+                            Graduated = "Istanbul University",
+                            Name = "Veli",
+                            PhoneNumber = "123451308224",
+                            Subject = "Physics",
+                            Surname = "Demirci"
+                        });
                 });
 #pragma warning restore 612, 618
         }

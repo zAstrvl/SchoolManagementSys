@@ -32,7 +32,9 @@ namespace SchoolManagementSys.Controllers
         public async Task<ActionResult<Parent>> AddParent(Parent newParent)
         {
             if (newParent == null || string.IsNullOrWhiteSpace(newParent.Name) || string.IsNullOrWhiteSpace(newParent.Surname))
-                return BadRequest("Invalid teacher data.");
+                return BadRequest("Invalid parent data.");
+
+            newParent.PasswordHash = HashClass.HashPassword(newParent.PasswordHash);
             _context.Parents.Add(newParent);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetParentById), new { id = newParent.Id }, newParent);
@@ -48,6 +50,7 @@ namespace SchoolManagementSys.Controllers
             parent.Surname = updatedParent.Surname;
             parent.DateOfBirth = updatedParent.DateOfBirth;
             parent.Email = updatedParent.Email;
+            parent.PasswordHash = HashClass.HashPassword(updatedParent.PasswordHash);
             parent.PhoneNumber = updatedParent.PhoneNumber;
             parent.Address = updatedParent.Address;
 
