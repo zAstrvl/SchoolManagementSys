@@ -33,6 +33,8 @@ namespace SchoolManagementSys.Controllers
         {
             if (newTeacher == null || string.IsNullOrWhiteSpace(newTeacher.Name) || string.IsNullOrWhiteSpace(newTeacher.Surname))
                 return BadRequest("Invalid teacher data.");
+
+            newTeacher.PasswordHash = HashClass.HashPassword(newTeacher.PasswordHash);
             _context.Teachers.Add(newTeacher);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetTeacherById), new { id = newTeacher.Id }, newTeacher);
@@ -49,6 +51,7 @@ namespace SchoolManagementSys.Controllers
             teacher.DateOfBirth = updatedTeacher.DateOfBirth;
             teacher.Subject = updatedTeacher.Subject;
             teacher.Email = updatedTeacher.Email;
+            teacher.PasswordHash = HashClass.HashPassword(updatedTeacher.PasswordHash);
             teacher.PhoneNumber = updatedTeacher.PhoneNumber;
             teacher.Graduated = updatedTeacher.Graduated;
 

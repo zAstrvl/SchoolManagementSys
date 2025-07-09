@@ -32,7 +32,9 @@ namespace SchoolManagementSys.Controllers
         public async Task<ActionResult<Student>> AddStudent(Student newStudent)
         {
             if (newStudent == null || string.IsNullOrWhiteSpace(newStudent.Name) || string.IsNullOrWhiteSpace(newStudent.Surname))
-                return BadRequest("Invalid teacher data.");
+                return BadRequest("Invalid student data.");
+
+            newStudent.PasswordHash = HashClass.HashPassword(newStudent.PasswordHash);
             _context.Students.Add(newStudent);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetStudentById), new { id = newStudent.Id }, newStudent);
@@ -46,6 +48,8 @@ namespace SchoolManagementSys.Controllers
 
             student.Name = updatedStudent.Name;
             student.Surname = updatedStudent.Surname;
+            student.IdentityNumber = updatedStudent.IdentityNumber;
+            student.PasswordHash = HashClass.HashPassword(updatedStudent.PasswordHash);
             student.DateOfBirth = updatedStudent.DateOfBirth;
 
             await _context.SaveChangesAsync();
