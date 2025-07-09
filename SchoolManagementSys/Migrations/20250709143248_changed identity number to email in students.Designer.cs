@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolManagementSys.Data;
 
@@ -11,9 +12,11 @@ using SchoolManagementSys.Data;
 namespace SchoolManagementSys.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20250709143248_changed identity number to email in students")]
+    partial class changedidentitynumbertoemailinstudents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace SchoolManagementSys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Parents", (string)null);
+                    b.ToTable("Parents");
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Student", b =>
@@ -83,7 +86,7 @@ namespace SchoolManagementSys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Teacher", b =>
@@ -121,7 +124,7 @@ namespace SchoolManagementSys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers", (string)null);
+                    b.ToTable("Teachers");
                 });
 #pragma warning restore 612, 618
         }
