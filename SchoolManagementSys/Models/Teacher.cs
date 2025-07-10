@@ -11,5 +11,6 @@
         public string PasswordHash { get; set; } = null!;
         public string? PhoneNumber { get; set; }
         public string? Graduated { get; set; }
+        public ICollection<Class>? Classes { get; set; }
     }
 }
