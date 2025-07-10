@@ -8,5 +8,9 @@
         public string? Email { get; set; }
         public string PasswordHash { get; set; } = null!;
         public DateTime DateOfBirth { get; set; }
+        public int? ClassId { get; set; }
+        public int? ParentId { get; set; }
+        public Class? Class { get; set; }
+        public Parent? Parent { get; set; }
     }
 }

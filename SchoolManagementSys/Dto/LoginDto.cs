@@ -1,4 +1,4 @@
-﻿namespace SchoolManagementSys.Models
+﻿namespace SchoolManagementSys.Dto
 {
     public class LoginDto
     {

@@ -13,28 +13,28 @@ Accept: application/json
 POST {{rootURL}}/api/students
 Content-Type: application/json
 {
-  "name": "Fatih",
-  "surname": "Arslan",
-  "Email": "35449829041",
-  "passwordHash": "7898980912894fdsaa",
-  "dateOfBirth": "1975-02-20T00:00:00"
+  "name": "Omercan",
+  "surname": "Yigit",
+  "Email": "ocy@kfk.cs",
+  "passwordHash": "19930rlfm",
+  "dateOfBirth": "1993-04-27T00:00:00"
 }
 
 ###
 
-PUT {{rootURL}}/api/students/7
+PUT {{rootURL}}/api/students/10
 Content-Type: application/json
 {
-  "name": "Fatih",
-  "surname": "Arslan",
-  "Email": "35449829041",
-  "passwordHash": "7898980912894fdsaa",
-  "dateOfBirth": "1975-02-20T00:00:00"
+  "name": "Kursat",
+  "surname": "Ozel",
+  "Email": "kozel@cv.net",
+  "passwordHash": "1983jfmesmf",
+  "dateOfBirth": "1981-06-26T00:00:00"
 }
 
 ###
 
-DELETE {{rootURL}}/api/students/8
+DELETE {{rootURL}}/api/students/7
 
 ###
 
@@ -43,7 +43,7 @@ Accept: application/json
 
 ###
 
-GET {{rootURL}}/api/teachers/2
+GET {{rootURL}}/api/teachers/5
 Accept: application/json
 
 ###
@@ -131,5 +131,46 @@ Content-Type: application/json
   "email": "fdafasd@sfdfaa.ccads",
   "password": "asfsfas43gfja8939842"
 }
+
+###
+
+GET {{rootURL}}/api/classes
+Accept: application/json
+
+###
+
+GET {{rootURL}}/api/classes/1
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/classes
+Content-Type: application/json
+{
+  "name": "Class 1",
+  "teacherId": 3,
+  "studentIds": [5, 9]
+}
+
+###
+
+PUT {{rootURL}}/api/classes/2
+Content-Type: application/json
+{
+  "name": "Class 2",
+  "teacherId": 3,
+  "students": [
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    }
+  ]
+}
+
+###
+
+DELETE {{rootURL}}/api/classes/3
 
 ###
