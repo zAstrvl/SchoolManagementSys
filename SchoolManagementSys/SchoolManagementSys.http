@@ -139,7 +139,7 @@ Accept: application/json
 
 ###
 
-GET {{rootURL}}/api/classes/1
+GET {{rootURL}}/api/classes/8
 Accept: application/json
 
 ###
@@ -147,30 +147,23 @@ Accept: application/json
 POST {{rootURL}}/api/classes
 Content-Type: application/json
 {
-  "name": "Class 1",
-  "teacherId": 3,
-  "studentIds": [5, 9]
+  "name": "Class 2",
+  "teacherId": 5,
+  "studentIds": [6, 10, 11]
 }
 
 ###
 
-PUT {{rootURL}}/api/classes/2
+PUT {{rootURL}}/api/classes/8
 Content-Type: application/json
 {
   "name": "Class 2",
-  "teacherId": 3,
-  "students": [
-    {
-      "id": 7
-    },
-    {
-      "id": 8
-    }
-  ]
+  "teacherId": 5,
+  "studentIds": [6, 10, 11]
 }
 
 ###
 
-DELETE {{rootURL}}/api/classes/3
+DELETE {{rootURL}}/api/classes/6
 
 ###
