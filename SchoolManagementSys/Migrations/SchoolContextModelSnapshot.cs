@@ -40,7 +40,7 @@ namespace SchoolManagementSys.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Parent", b =>
@@ -75,7 +75,7 @@ namespace SchoolManagementSys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Parents");
+                    b.ToTable("Parents", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Student", b =>
@@ -114,7 +114,7 @@ namespace SchoolManagementSys.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Teacher", b =>
@@ -152,7 +152,7 @@ namespace SchoolManagementSys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Class", b =>

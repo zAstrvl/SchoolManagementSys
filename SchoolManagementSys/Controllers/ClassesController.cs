@@ -23,8 +23,20 @@ namespace SchoolManagementSys.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Class>>> GetClasses()
         {
-            var classes = await _context.Classes.ToListAsync();
-            return Ok(classes);
+            var classes = await _context.Classes
+                .Include(c => c.Teacher)
+                .Include(c => c.Students)
+                .ToListAsync();
+
+            var classDtos = classes.Select(c => new ClassCreateDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                TeacherId = c.TeacherId,
+                StudentIds = c.Students.Select(s => s.Id).ToList()
+            }).ToList();
+
+            return Ok(classDtos);
         }
 
         [HttpGet("{id}")]
@@ -88,6 +100,21 @@ namespace SchoolManagementSys.Controllers
             if (classEntity == null)
                 return NotFound();
 
+            var classDto = new ClassCreateDto
+            {
+                Id = classEntity.Id,
+                Name = classEntity.Name,
+                TeacherId = classEntity.TeacherId,
+                StudentIds = classEntity.Students.Select(s => s.Id).ToList()
+            };
+
+            updatedClass.StudentIds ??= new List<int>();
+
+            classDto.Id = updatedClass.Id;
+            classDto.Name = updatedClass.Name;
+            classDto.TeacherId = updatedClass.TeacherId;
+            classDto.StudentIds = updatedClass.StudentIds;
+
             classEntity.Name = updatedClass.Name;
             await _context.SaveChangesAsync();
             return NoContent();
@@ -100,6 +127,13 @@ namespace SchoolManagementSys.Controllers
 
             if (classEntity == null)
                 return NotFound();
+
+            var students = _context.Students
+                .Where(s => s.ClassId == id)
+                .ToList();
+
+            foreach (var student in students)
+                student.ClassId = null;
 
             _context.Classes.Remove(classEntity);
             await _context.SaveChangesAsync();
