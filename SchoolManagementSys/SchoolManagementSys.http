@@ -167,3 +167,59 @@ Content-Type: application/json
 DELETE {{rootURL}}/api/classes/6
 
 ###
+
+GET {{rootURL}}/api/hero
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/hero
+Content-Type: application/json
+{
+  "title": "Fast Shipping",
+  "description": "Your package is at your address in 24 hours.",
+  "imageUrl": "https://example.com/shipping-fast-icon.jpg"
+}
+
+###
+
+DELETE {{rootURL}}/api/hero/4
+
+###
+
+GET {{rootURL}}/api/features
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/features
+Content-Type: application/json
+{
+  "title": "User-Friendly Interface",
+  "description": "Shop without any interruptions",
+  "imageUrl": "https://example.com/no-interruption.png"
+}
+
+###
+
+DELETE {{rootURL}}/api/features/3
+
+###
+
+GET {{rootURL}}/api/aboutus
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/aboutus
+Content-Type: application/json
+{
+  "title": "About Us",
+  "description": "We are a leading e-commerce platform providing the best products and services."
+}
+
+###
+
+DELETE {{rootURL}}/api/aboutus/1
+
+###

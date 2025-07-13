@@ -15,7 +15,9 @@ namespace SchoolManagementSys.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Parent> Parents { get; set; }
-
         public DbSet<Class> Classes { get; set; }
+        public DbSet<Hero> Heroes { get; set; }
+        public DbSet<Features> Features { get; set; }
+        public DbSet<AboutUs> AboutUs { get; set; }
     }
 }
