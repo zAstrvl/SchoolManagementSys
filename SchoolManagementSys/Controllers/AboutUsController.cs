@@ -42,6 +42,28 @@ namespace SchoolManagementSys.Controllers
             return CreatedAtAction(nameof(GetAboutUs), new { id = aboutUs.Id }, aboutUs);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAboutUs(int id, [FromBody] AboutUs aboutUs)
+        {
+            if (aboutUs == null || string.IsNullOrEmpty(aboutUs.Title))
+            {
+                return BadRequest("Invalid About Us data.");
+            }
+
+            var existingAboutUs = await _context.AboutUs.FindAsync(id);
+            if (existingAboutUs == null)
+            {
+                return NotFound("About Us information not found.");
+            }
+
+            existingAboutUs.Title = aboutUs.Title;
+            existingAboutUs.Description = aboutUs.Description;
+
+            _context.AboutUs.Update(existingAboutUs);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAboutUs(int id)
         {

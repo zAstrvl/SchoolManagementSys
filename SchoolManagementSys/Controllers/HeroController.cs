@@ -51,6 +51,23 @@ namespace SchoolManagementSys.Controllers
             return CreatedAtAction(nameof(GetHeroes), new { id = newHero.Id }, newHero);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateHero(int id, [FromBody] Hero hero)
+        {
+            var heroEntity = await _context.Heroes.FindAsync(id);
+
+            if (heroEntity == null)
+                return NotFound();
+
+            heroEntity.Title = hero.Title;
+            heroEntity.Description = hero.Description;
+            heroEntity.ImageUrl = hero.ImageUrl;
+
+            _context.Entry(heroEntity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHero(int id)
         {
