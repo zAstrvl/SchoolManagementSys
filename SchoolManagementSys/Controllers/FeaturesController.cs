@@ -54,6 +54,29 @@ namespace SchoolManagementSys.Controllers
             return CreatedAtAction(nameof(GetFeatures), new { id = feature.Id }, feature);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateFeature(int id, [FromBody] Features feature)
+        {
+            if (feature == null || string.IsNullOrEmpty(feature.Title))
+            {
+                return BadRequest("Invalid feature data.");
+            }
+
+            var featureEntity = await _context.Features.FindAsync(id);
+            if (featureEntity == null)
+            {
+                return NotFound("Feature not found.");
+            }
+
+            featureEntity.Title = feature.Title;
+            featureEntity.Description = feature.Description;
+            featureEntity.ImageUrl = feature.ImageUrl;
+
+            _context.Features.Update(featureEntity);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFeature(int id)
         {
