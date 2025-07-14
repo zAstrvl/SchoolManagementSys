@@ -1,8 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    var imageFolder = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot/images");
+    var imageFiles = System.IO.Directory.Exists(imageFolder)
+        ? System.IO.Directory.GetFiles(imageFolder)
+            .Select(f => System.IO.Path.GetFileName(f))
+            .ToList()
+        : new List<string>();
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@if (imageFiles.Any())
+{
+    <h2>Images in wwwroot/images</h2>
+    <ul>
+        @foreach (var img in imageFiles)
+        {
+            <li>
+                <a href="/images/@img" target="_blank">@img</a><br />
+                <img src="/images/@img" alt="@img" style="max-width:200px;max-height:200px;" />
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No images found in wwwroot/images.</p>
+}

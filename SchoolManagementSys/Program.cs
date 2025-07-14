@@ -32,6 +32,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors(builder =>
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
+app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();
