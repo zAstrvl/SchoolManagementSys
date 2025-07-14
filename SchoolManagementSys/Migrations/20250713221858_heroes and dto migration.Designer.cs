@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolManagementSys.Data;
 
@@ -11,9 +12,11 @@ using SchoolManagementSys.Data;
 namespace SchoolManagementSys.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20250713221858_heroes and dto migration")]
+    partial class heroesanddtomigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,25 +24,6 @@ namespace SchoolManagementSys.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("SchoolManagementSys.Models.AboutUs", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AboutUs");
-                });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Class", b =>
                 {
@@ -62,28 +46,6 @@ namespace SchoolManagementSys.Migrations
                     b.ToTable("Classes");
                 });
 
-            modelBuilder.Entity("SchoolManagementSys.Models.Features", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Features");
-                });
-
             modelBuilder.Entity("SchoolManagementSys.Models.Hero", b =>
                 {
                     b.Property<int>("Id")
@@ -95,6 +57,9 @@ namespace SchoolManagementSys.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("HeroId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -102,6 +67,8 @@ namespace SchoolManagementSys.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HeroId");
 
                     b.ToTable("Heroes");
                 });
@@ -229,6 +196,13 @@ namespace SchoolManagementSys.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("SchoolManagementSys.Models.Hero", b =>
+                {
+                    b.HasOne("SchoolManagementSys.Models.Hero", null)
+                        .WithMany("Heroes")
+                        .HasForeignKey("HeroId");
+                });
+
             modelBuilder.Entity("SchoolManagementSys.Models.Student", b =>
                 {
                     b.HasOne("SchoolManagementSys.Models.Class", "Class")
@@ -247,6 +221,11 @@ namespace SchoolManagementSys.Migrations
             modelBuilder.Entity("SchoolManagementSys.Models.Class", b =>
                 {
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("SchoolManagementSys.Models.Hero", b =>
+                {
+                    b.Navigation("Heroes");
                 });
 
             modelBuilder.Entity("SchoolManagementSys.Models.Parent", b =>
