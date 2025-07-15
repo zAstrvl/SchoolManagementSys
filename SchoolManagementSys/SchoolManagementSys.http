@@ -252,3 +252,47 @@ Content-Type: application/json
 DELETE {{rootURL}}/api/aboutus/1
 
 ###
+
+GET {{rootURL}}/api/testimonials
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/testimonials
+Content-Type: application/json
+{
+  "title": "Customer Satisfaction",
+  "description": "We value our customers and strive to provide the best service possible.",
+  "imageUrl": "C:/Users/x/Desktop/SchoolManagementSys/SchoolManagementSys/wwwroot/images/image1.webp"
+}
+
+###
+
+PUT {{rootURL}}/api/testimonials/1
+Content-Type: application/json
+{
+  "title": "Customer Guarantee",
+  "description": "We value our customers and strive to provide the best service possible. Your feedback is important to us.",
+  "imageUrl": "C:/Users/x/Desktop/SchoolManagementSys/SchoolManagementSys/wwwroot/images/image1.webp"
+}
+
+###
+
+DELETE {{rootURL}}/api/testimonials/2
+
+###
+
+GET {{rootURL}}/api/contactus
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/contactus
+Content-Type: application/json
+{
+  "name": "John Doe",
+  "email": "fdvccvcv@fdsfafasd.casdfas",
+  "message": "I have a question about my order."
+}
+
+###

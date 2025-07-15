@@ -19,5 +19,7 @@ namespace SchoolManagementSys.Data
         public DbSet<Hero> Heroes { get; set; }
         public DbSet<Features> Features { get; set; }
         public DbSet<AboutUs> AboutUs { get; set; }
+        public DbSet<Testimonials> Testimonials { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
     }
 }
