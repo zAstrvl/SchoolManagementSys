@@ -21,5 +21,6 @@ namespace SchoolManagementSys.Data
         public DbSet<AboutUs> AboutUs { get; set; }
         public DbSet<Testimonials> Testimonials { get; set; }
         public DbSet<MailData> MailData { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

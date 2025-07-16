@@ -2,6 +2,7 @@
 using SchoolManagementSys.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolManagementSys.Controllers
 {
@@ -16,6 +17,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var testimonials = await _context.Testimonials.ToListAsync();
@@ -29,6 +31,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([FromBody] Testimonials testimonial)
         {
             if (testimonial == null)
@@ -50,6 +53,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, [FromBody] Testimonials testimonial)
         {
             if (testimonial == null)
@@ -73,6 +77,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var testimonial = await _context.Testimonials.FindAsync(id);

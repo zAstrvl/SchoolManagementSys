@@ -1,7 +1,8 @@
-﻿using SchoolManagementSys.Data;
-using SchoolManagementSys.Models;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SchoolManagementSys.Data;
+using SchoolManagementSys.Models;
 
 namespace SchoolManagementSys.Controllers
 {
@@ -17,6 +18,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Hero>>> GetHeroes()
         {
             var heroes = await _context.Heroes.ToListAsync();
@@ -30,6 +32,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateHero([FromBody] Hero hero)
         {
             var heroEntity = await _context.Heroes.FirstOrDefaultAsync(h => h.Title == hero.Title);
@@ -52,6 +55,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateHero(int id, [FromBody] Hero hero)
         {
             var heroEntity = await _context.Heroes.FindAsync(id);
@@ -69,6 +73,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteHero(int id)
         {
             var heroEntity = await _context.Heroes.FindAsync(id);

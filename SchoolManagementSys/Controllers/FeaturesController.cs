@@ -1,7 +1,8 @@
-﻿using SchoolManagementSys.Models;
-using SchoolManagementSys.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SchoolManagementSys.Data;
+using SchoolManagementSys.Models;
 
 namespace SchoolManagementSys.Controllers
 {
@@ -17,6 +18,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Features>>> GetFeatures()
         {
             var features = await _context.Features.ToListAsync();
@@ -30,6 +32,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateFeature([FromBody] Features feature)
         {
             var features = await _context.Features.FirstOrDefaultAsync(f => f.Title == feature.Title);
@@ -55,6 +58,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateFeature(int id, [FromBody] Features feature)
         {
             if (feature == null || string.IsNullOrEmpty(feature.Title))
@@ -78,6 +82,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteFeature(int id)
         {
             var feature = await _context.Features.FindAsync(id);
