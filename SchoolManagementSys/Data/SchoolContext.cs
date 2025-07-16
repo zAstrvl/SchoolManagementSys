@@ -20,6 +20,6 @@ namespace SchoolManagementSys.Data
         public DbSet<Features> Features { get; set; }
         public DbSet<AboutUs> AboutUs { get; set; }
         public DbSet<Testimonials> Testimonials { get; set; }
-        public DbSet<ContactUs> ContactUs { get; set; }
+        public DbSet<MailData> MailData { get; set; }
     }
 }
