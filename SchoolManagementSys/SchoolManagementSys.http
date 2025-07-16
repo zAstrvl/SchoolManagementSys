@@ -282,17 +282,11 @@ DELETE {{rootURL}}/api/testimonials/2
 
 ###
 
-GET {{rootURL}}/api/contactus
-Accept: application/json
-
-###
-
-POST {{rootURL}}/api/contactus
+POST {{rootURL}}/api/mail
 Content-Type: application/json
 {
-  "name": "John Doe",
-  "email": "fdvccvcv@fdsfafasd.casdfas",
-  "message": "I have a question about my order."
+  "emailTo": "n4bxd3st21@bltiwd.com",
+  "emailSubject": "Test Email",
+  "emailBody": "test ediyorum"
 }
-
 ###

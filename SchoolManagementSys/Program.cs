@@ -1,7 +1,9 @@
-using SchoolManagementSys.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SchoolManagementSys.Data;
+using SchoolManagementSys.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,7 @@ builder.Services.AddAuthentication("Bearer")
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
