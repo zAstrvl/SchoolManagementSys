@@ -17,7 +17,6 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var testimonials = await _context.Testimonials.ToListAsync();

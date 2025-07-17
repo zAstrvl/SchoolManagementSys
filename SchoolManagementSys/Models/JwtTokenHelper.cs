@@ -7,11 +7,12 @@ namespace SchoolManagementSys.Models
 {
     public static class JwtTokenHelper
     {
-        public static string GenerateToken(string email, string secretKey)
+        public static string GenerateToken(string email, string userType, string secretKey)
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.Email, email)
+                new Claim(ClaimTypes.Email, email),
+                new Claim(ClaimTypes.Role, userType)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -19,7 +20,7 @@ namespace SchoolManagementSys.Models
 
             var token = new JwtSecurityToken(
                 issuer: "SchoolManagementSys",
-                audience: "SchoolManagementSysUsers",
+                audience: "SchoolManagementSys",
                 claims: claims,
                 expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds
