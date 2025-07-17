@@ -1,7 +1,8 @@
-﻿using SchoolManagementSys.Models;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSys.Data;
+using SchoolManagementSys.Models;
 
 namespace SchoolManagementSys.Controllers
 {
@@ -17,6 +18,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AboutUs>> GetAboutUs()
         {
             var aboutUs = await _context.AboutUs.ToListAsync();
@@ -30,6 +32,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AboutUs>> CreateAboutUs([FromBody] AboutUs aboutUs)
         {
             if (aboutUs == null)
@@ -43,6 +46,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateAboutUs(int id, [FromBody] AboutUs aboutUs)
         {
             if (aboutUs == null || string.IsNullOrEmpty(aboutUs.Title))
@@ -65,6 +69,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAboutUs(int id)
         {
             var aboutUs = await _context.AboutUs.FindAsync(id);

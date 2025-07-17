@@ -127,8 +127,9 @@ DELETE {{rootURL}}/api/parents/3
 
 POST {{rootURL}}/api/auth/login
 Content-Type: application/json
+
 {
-  "email": "fdafasd@sfdfaa.ccads",
+  "email": "fdfsfsfd@fdffdd.cc",
   "password": "asfsfas43gfja8939842"
 }
 
@@ -290,3 +291,14 @@ Content-Type: application/json
   "emailBody": "test ediyorum"
 }
 ###
+
+POST {{rootURL}}/api/auth/register
+Content-Type: application/json
+{
+  "name": "Eren",
+  "email": "fdfsfsfd@fdffdd.cc",
+  "password": "asfsfas43gfja8939842",
+  "confirmPassword": "asfsfas43gfja8939842",
+  "agreed": false,
+  "userType": 0
+}
