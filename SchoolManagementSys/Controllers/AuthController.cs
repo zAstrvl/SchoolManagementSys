@@ -22,32 +22,12 @@ namespace SchoolManagementSys.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            var parent = await _context.Parents.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
-            if (parent != null && HashClass.VerifyPassword(parent.PasswordHash, loginDto.Password))
-            {
-                var token = JwtTokenHelper.GenerateToken(parent.Email!, _configuration["Jwt:Key"]);
-                return Ok(new { token, userType = "Parent" });
-            }
-
-            var teacher = await _context.Teachers.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
-            if (teacher != null && HashClass.VerifyPassword(teacher.PasswordHash, loginDto.Password))
-            {
-                var token = JwtTokenHelper.GenerateToken(teacher.Email!, _configuration["Jwt:Key"]);
-                return Ok(new { token, userType = "Teacher" });
-            }
-
-            var student = await _context.Students.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
-            if (student != null && HashClass.VerifyPassword(student.PasswordHash, loginDto.Password))
-            {
-                var token = JwtTokenHelper.GenerateToken(student.Email!, _configuration["Jwt:Key"]);
-                return Ok(new { token, userType = "Student" });
-            }
-
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+
             if (user != null && HashClass.VerifyPassword(user.PasswordHash, loginDto.Password))
             {
-                var token = JwtTokenHelper.GenerateToken(user.Email!, _configuration["Jwt:Key"]);
-                return Ok(new { token, userType = user.UserType });
+                var token = JwtTokenHelper.GenerateToken(user.Email!, user.UserType.ToString()!, _configuration["Jwt:Key"]);
+                return Ok(new { token, userType = user.UserType.ToString() });
             }
 
             return Unauthorized();

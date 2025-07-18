@@ -18,7 +18,6 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Features>>> GetFeatures()
         {
             var features = await _context.Features.ToListAsync();
@@ -41,7 +40,7 @@ namespace SchoolManagementSys.Controllers
             {
                 return BadRequest("Invalid feature data.");
             }
-            
+
             if (features != null)
                 return BadRequest("Feature with this title already exists.");
 
