@@ -187,8 +187,8 @@ Content-Type: application/json
 PUT {{rootURL}}/api/hero/8
 Content-Type: application/json
 {
-  "title": "24/7 Support",
-  "description": "We are here to help you at any time.",
+  "title": "Hýzlý Gönderim",
+  "description": "Kargonuz en fazla 24 saat içinde kapýnýzda.",
   "imageUrl": "C:/Users/x/Desktop/SchoolManagementSys/SchoolManagementSys/wwwroot/images/image2.jpg"
 }
 
