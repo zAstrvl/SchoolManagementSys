@@ -25,6 +25,17 @@ builder.Services.AddAuthentication("Bearer")
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -38,7 +49,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-
+app.UseCors("AllowReactApp");
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors(builder =>
@@ -46,7 +57,6 @@ app.UseCors(builder =>
            .AllowAnyMethod()
            .AllowAnyHeader());
 app.UseStaticFiles();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
