@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagementSys.Data;
+using SchoolManagementSys.Dto;
 using SchoolManagementSys.Models;
 
 namespace SchoolManagementSys.Controllers
@@ -23,7 +24,16 @@ namespace SchoolManagementSys.Controllers
             {
                 return NotFound("No users found.");
             }
-            return Ok(users);
+
+            var response = users.Select(u => new UserDto
+            {
+                Id = u.Id,
+                Name = u.Name,
+                Email = u.Email,
+                UserType = u.UserType
+            }).ToList();
+
+            return Ok(response);
         }
 
         [HttpPost]
@@ -41,9 +51,20 @@ namespace SchoolManagementSys.Controllers
                 return BadRequest("A user with this email already exists.");
             }
 
+            var hashedPassword = HashClass.HashPassword(user.Password);
+            user.Password = hashedPassword;
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetUsers), new { id = user.Id }, user);
+
+            var response = new UserDto
+            {
+                Name = user.Name,
+                Email = user.Email,
+                UserType = user.UserType
+            };
+
+            return Ok(response);
         }
 
         [HttpPut("{id}")]
