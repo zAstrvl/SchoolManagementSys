@@ -24,7 +24,7 @@ namespace SchoolManagementSys.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
 
-            if (user != null && HashClass.VerifyPassword(user.PasswordHash, loginDto.Password))
+            if (user != null && HashClass.VerifyPassword(user.Password, loginDto.Password))
             {
                 var token = JwtTokenHelper.GenerateToken(user.Email!, user.UserType.ToString()!, _configuration["Jwt:Key"]);
                 return Ok(new { token, userType = user.UserType.ToString() });
@@ -69,7 +69,7 @@ namespace SchoolManagementSys.Controllers
             {
                 Name = registerDto.Name,
                 Email = registerDto.Email,
-                PasswordHash = HashClass.HashPassword(registerDto.Password),
+                Password = HashClass.HashPassword(registerDto.Password),
                 UserType = registerDto.UserType
             });
 
