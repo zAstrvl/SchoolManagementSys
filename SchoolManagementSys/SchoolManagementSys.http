@@ -287,9 +287,9 @@ DELETE {{rootURL}}/api/testimonials/2
 POST {{rootURL}}/api/mail
 Content-Type: application/json
 {
-  "emailTo": "n4bxd3st21@bltiwd.com",
-  "emailSubject": "Test Email",
-  "emailBody": "test ediyorum"
+  "name": "lsbh4yizvr@mkzaso.com",
+  "email": "Test Email",
+  "message": "test ediyorum"
 }
 ###
 
