@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
+using System.Net;
 using SchoolManagementSys.Models;
 
 namespace SchoolManagementSys.Controllers
 {
+    [Route("api/mail")]
+    [ApiController]
     public class EmailController : Controller
     {
         private readonly IEmailSender _emailSender;
@@ -15,14 +19,15 @@ namespace SchoolManagementSys.Controllers
         [HttpPost]
         public async Task<IActionResult> SendEmail([FromBody] MailData mailData)
         {
-            if (mailData == null || string.IsNullOrEmpty(mailData.EmailTo) || string.IsNullOrEmpty(mailData.EmailSubject) || string.IsNullOrEmpty(mailData.EmailBody))
+            if (mailData == null || string.IsNullOrEmpty(mailData.Email) || string.IsNullOrEmpty(mailData.Message) || string.IsNullOrEmpty(mailData.Name))
             {
                 return BadRequest("Invalid mail data.");
             }
 
             try
             {
-                await _emailSender.SendEmailAsync(mailData.EmailTo, mailData.EmailSubject, mailData.EmailBody);
+                await _emailSender.SendEmailAsync(mailData.Email, mailData.Name, mailData.Message);
+
                 return Ok("E-posta başarıyla gönderildi.");
             }
             catch (Exception ex)
