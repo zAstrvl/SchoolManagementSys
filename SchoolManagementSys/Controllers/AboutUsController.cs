@@ -22,6 +22,7 @@ namespace SchoolManagementSys.Controllers
         {
             var aboutUs = await _context.AboutUs.ToListAsync();
 
+            // Check if the About Us information exists
             if (aboutUs == null)
             {
                 return NotFound("About Us information not found.");
@@ -34,11 +35,13 @@ namespace SchoolManagementSys.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AboutUs>> CreateAboutUs([FromBody] AboutUs aboutUs)
         {
+            // Check if the aboutUs object is null or has invalid data
             if (aboutUs == null)
             {
                 return BadRequest("Invalid About Us data.");
             }
 
+            // Adds data
             _context.AboutUs.Add(aboutUs);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetAboutUs), new { id = aboutUs.Id }, aboutUs);
@@ -53,12 +56,14 @@ namespace SchoolManagementSys.Controllers
                 return BadRequest("Invalid About Us data.");
             }
 
+            // Check if the About Us information exists
             var existingAboutUs = await _context.AboutUs.FindAsync(id);
             if (existingAboutUs == null)
             {
                 return NotFound("About Us information not found.");
             }
 
+            // Update the existing About Us information
             existingAboutUs.Title = aboutUs.Title;
             existingAboutUs.Description = aboutUs.Description;
 
@@ -78,6 +83,7 @@ namespace SchoolManagementSys.Controllers
                 return NotFound("About Us information not found.");
             }
 
+            // Remove the About Us information
             _context.AboutUs.Remove(aboutUs);
             await _context.SaveChangesAsync();
             return NoContent();
