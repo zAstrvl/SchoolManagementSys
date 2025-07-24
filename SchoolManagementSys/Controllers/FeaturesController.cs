@@ -22,6 +22,7 @@ namespace SchoolManagementSys.Controllers
         {
             var features = await _context.Features.ToListAsync();
 
+            // Check if the features list is null or empty
             if (features == null || !features.Any())
             {
                 return NotFound("No features found.");
@@ -41,6 +42,7 @@ namespace SchoolManagementSys.Controllers
                 return BadRequest("Invalid feature data.");
             }
 
+            // Check if feature exists
             if (features != null)
                 return BadRequest("Feature with this title already exists.");
 
@@ -51,6 +53,7 @@ namespace SchoolManagementSys.Controllers
                 ImageUrl = feature.ImageUrl
             };
 
+            // Adds the feature
             _context.Features.Add(feature);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetFeatures), new { id = feature.Id }, feature);
@@ -71,6 +74,7 @@ namespace SchoolManagementSys.Controllers
                 return NotFound("Feature not found.");
             }
 
+            // Update feature data
             featureEntity.Title = feature.Title;
             featureEntity.Description = feature.Description;
             featureEntity.ImageUrl = feature.ImageUrl;
@@ -91,6 +95,7 @@ namespace SchoolManagementSys.Controllers
                 return NotFound("Feature not found.");
             }
 
+            // Remove feature data
             _context.Features.Remove(feature);
             await _context.SaveChangesAsync();
             return NoContent();

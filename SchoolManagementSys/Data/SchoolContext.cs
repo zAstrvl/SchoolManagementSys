@@ -12,6 +12,8 @@ namespace SchoolManagementSys.Data
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        // Sets for the database tables
         public DbSet<Hero> Heroes { get; set; }
         public DbSet<Features> Features { get; set; }
         public DbSet<AboutUs> AboutUs { get; set; }
