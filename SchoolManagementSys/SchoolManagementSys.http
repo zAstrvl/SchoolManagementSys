@@ -1,0 +1,305 @@
+@rootURL = https://localhost:7294
+
+GET {{rootURL}}/api/students
+Accept: application/json
+
+###
+
+GET {{rootURL}}/api/students/5
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/students
+Content-Type: application/json
+{
+  "name": "Omercan",
+  "surname": "Yigit",
+  "Email": "ocy@kfk.cs",
+  "passwordHash": "19930rlfm",
+  "dateOfBirth": "1993-04-27T00:00:00"
+}
+
+###
+
+PUT {{rootURL}}/api/students/10
+Content-Type: application/json
+{
+  "name": "Kursat",
+  "surname": "Ozel",
+  "Email": "kozel@cv.net",
+  "passwordHash": "1983jfmesmf",
+  "dateOfBirth": "1981-06-26T00:00:00"
+}
+
+###
+
+DELETE {{rootURL}}/api/students/7
+
+###
+
+GET {{rootURL}}/api/teachers
+Accept: application/json
+
+###
+
+GET {{rootURL}}/api/teachers/5
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/teachers
+Content-Type: application/json
+{
+  "name": "Eren",
+  "surname": "Arslan",
+  "dateOfBirth": "2004-05-31T00:00:00",
+  "subject": "Computers",
+  "email": "fasfgadg@gfadgfsd.dadaad",
+  "passwordHash": "asfsfas43gfja8939842",
+  "phoneNumber": "74139416841",
+  "graduated": "baun"
+}
+
+###
+
+PUT {{rootURL}}/api/teachers/3
+Content-Type: application/json
+{
+  "name": "Tolga",
+  "surname": "Benzer",
+  "dateOfBirth": "1990-05-30T00:00:00",
+  "subject": "Economics",
+  "email": "tffasgrfhgv@ffeggd.bmdm",
+  "passwordHash": "mjkd93ukoo203",
+  "phoneNumber": "3135694329",
+  "graduated": "itu"
+}
+
+###
+
+DELETE {{rootURL}}/api/teachers/4
+
+###
+
+GET {{rootURL}}/api/parents
+Accept: application/json
+
+###
+
+GET {{rootURL}}/api/parents/3
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/parents
+Content-Type: application/json
+{
+  "name": "Eren",
+  "surname": "Arslan",
+  "dateOfBirth": "2004-05-31T00:00:00",
+  "email": "fdafasd@sfdfaa.ccads",
+  "passwordHash": "asfsfas43gfja8939842",
+  "phoneNumber": "74139416841",
+  "address": "Eminonu, Istanbul"
+}
+
+###
+
+PUT {{rootURL}}/api/parents/3
+Content-Type: application/json
+
+{
+  "name": "Fatih",
+  "surname": "Arslan",
+  "dateOfBirth": "1975-02-03T00:00:00",
+  "email": "ddffccfas31@fasdfas.dews",
+  "passwordHash": "dasffdasfas",
+  "phoneNumber": "321312",
+  "address": "Karakoy, Istanbul"
+}
+
+###
+
+DELETE {{rootURL}}/api/parents/3
+
+###
+
+POST {{rootURL}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "fdfsfsfd@fdffdd.cc",
+  "password": "asfsfas43gfja8939842"
+}
+
+###
+
+GET {{rootURL}}/api/classes
+Accept: application/json
+
+###
+
+GET {{rootURL}}/api/classes/8
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/classes
+Content-Type: application/json
+{
+  "name": "Class 2",
+  "teacherId": 5,
+  "studentIds": [6, 10, 11]
+}
+
+###
+
+PUT {{rootURL}}/api/classes/8
+Content-Type: application/json
+{
+  "name": "Class 2",
+  "teacherId": 5,
+  "studentIds": [6, 10, 11]
+}
+
+###
+
+DELETE {{rootURL}}/api/classes/6
+
+###
+
+GET {{rootURL}}/api/hero
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/hero
+Content-Type: application/json
+{
+  "title": "Fast Shipping",
+  "description": "Your package is at your address in 24 hours.",
+  "imageUrl": "https://example.com/shipping-fast-icon.jpg"
+}
+
+###
+
+PUT {{rootURL}}/api/hero/8
+Content-Type: application/json
+{
+  "title": "Hýzlý Gönderim",
+  "description": "Kargonuz en fazla 24 saat içinde kapýnýzda.",
+  "imageUrl": "C:/Users/x/Desktop/SchoolManagementSys/SchoolManagementSys/wwwroot/images/image2.jpg"
+}
+
+###
+
+DELETE {{rootURL}}/api/hero/4
+
+###
+
+GET {{rootURL}}/api/features
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/features
+Content-Type: application/json
+{
+  "title": "User-Friendly Interface",
+  "description": "Shop without any interruptions",
+  "imageUrl": "https://example.com/no-interruption.png"
+}
+
+###
+
+PUT {{rootURL}}/api/features/2
+Content-Type: application/json
+
+{
+  "title": "User-Friendly Interface",
+  "description": "Shop without any interruptions. Our platform is designed to provide a seamless shopping experience.",
+  "imageUrl": "C:/Users/x/Desktop/SchoolManagementSys/SchoolManagementSys/wwwroot/images/image1.webp"
+}
+
+###
+
+DELETE {{rootURL}}/api/features/3
+
+###
+
+GET {{rootURL}}/api/aboutus
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/aboutus
+Content-Type: application/json
+{
+  "title": "About Us",
+  "description": "We are a leading e-commerce platform providing the best products and services."
+}
+
+###
+
+PUT {{rootURL}}/api/aboutus/2
+Content-Type: application/json
+{
+  "title": "Biz Kimiz?",
+  "description": "Bir e-ticaret sitesiyiz."
+}
+
+###
+
+DELETE {{rootURL}}/api/aboutus/1
+
+###
+
+GET {{rootURL}}/api/testimonials
+Accept: application/json
+
+###
+
+POST {{rootURL}}/api/testimonials
+Content-Type: application/json
+{
+  "title": "Customer Satisfaction",
+  "description": "We value our customers and strive to provide the best service possible.",
+  "imageUrl": "C:/Users/x/Desktop/SchoolManagementSys/SchoolManagementSys/wwwroot/images/image1.webp"
+}
+
+###
+
+PUT {{rootURL}}/api/testimonials/1
+Content-Type: application/json
+{
+  "title": "Customer Guarantee",
+  "description": "We value our customers and strive to provide the best service possible. Your feedback is important to us.",
+  "imageUrl": "C:/Users/x/Desktop/SchoolManagementSys/SchoolManagementSys/wwwroot/images/image1.webp"
+}
+
+###
+
+DELETE {{rootURL}}/api/testimonials/2
+
+###
+
+POST {{rootURL}}/api/mail
+Content-Type: application/json
+{
+  "name": "lsbh4yizvr@mkzaso.com",
+  "email": "Test Email",
+  "message": "test ediyorum"
+}
+###
+
+POST {{rootURL}}/api/auth/register
+Content-Type: application/json
+{
+  "name": "Eren",
+  "email": "fdfsfsfd@fdffdd.cc",
+  "password": "asfsfas43gfja8939842",
+  "confirmPassword": "asfsfas43gfja8939842",
+  "agreed": false,
+  "userType": 0
+}
