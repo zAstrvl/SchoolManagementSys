@@ -18,7 +18,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         public async Task<ActionResult<AboutUs>> GetAboutUs()
         {
             var aboutUs = await _context.AboutUs.ToListAsync();

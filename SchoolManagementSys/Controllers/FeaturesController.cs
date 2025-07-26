@@ -18,7 +18,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<Features>>> GetFeatures()
         {
             var features = await _context.Features.ToListAsync();
