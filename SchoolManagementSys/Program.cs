@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+            policy.WithOrigins("http://localhost:3000", "https://admin-panel-ui-theta.vercel.app")
                   .AllowAnyHeader()
                   .AllowAnyMethod()
                   .AllowCredentials();
