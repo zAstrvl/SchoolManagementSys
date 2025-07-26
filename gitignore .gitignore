@@ -1,0 +1,58 @@
+## Build ve yayýn çýktýlarý
+bin/
+obj/
+out/
+publish/
+TestResults/
+
+## Kullanýcýya özel dosyalar ve ayarlar
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider ve JetBrains dosyalarý
+.idea/
+*.sln.iml
+
+## Paket yönetimi
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+## Log ve geçici dosyalar
+*.log
+*.tlog
+*.tmp
+*.temp
+
+## OS ve editör dosyalarý
+.DS_Store
+Thumbs.db
+
+## Gizli ayar dosyalarý (örnek býrakmak için)
+appsettings.Development.json
+appsettings.Local.json
+
+## Kiþisel ayarlar
+*.swp
+*.bak
+
+## Publish profilleri
+Properties/PublishProfiles/
+
+## wwwroot dýþý statik dosyalar
+wwwroot/node_modules/
+wwwroot/lib/
+
+## Dotnet tool restore
+.dotnet_tool/
+
+## Diðer
+*.dbmdl
+*.dbproj.schemaview
+*.pdb
+*.mdb
