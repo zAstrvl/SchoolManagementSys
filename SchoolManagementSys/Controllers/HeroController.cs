@@ -18,6 +18,7 @@ namespace SchoolManagementSys.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Hero>>> GetHeroes()
         {
             // Fetch all heroes from the database
